@@ -29,6 +29,8 @@ const containerVariants= {
     }
 }
 const Home = () => {
+    const [titleOnClick,setTitleOnClick] = useState(false)
+
   return (
     <motion.div className="home container" 
     variants={containerVariants}
@@ -36,11 +38,12 @@ const Home = () => {
     animate="visible"
     exit="exit"
      >
-    <motion.h2    animate={{ fontSize: '50px',color: '#ff2994',  }} drag="x"
+    <motion.h2   drag="x"
     dragConstraints={{ left: -100, right: 100 }}      transition={{ duration: 0.5 }}
-     whileHover={{scale: 2.4}} whileTap={{scale: 0.9}}
+    whileTap={{scale: 0.9,color: 'red'}}
+    onClick={() =>setTitleOnClick(!titleOnClick)}
     >
-      Welcome to Pizza Joint
+      Welcome to Pizza Joint {titleOnClick ? ':)' : ""}
     </motion.h2>
       <Link to="/base">
         <motion.button variants={buttonVarians} whileHover="hover">
