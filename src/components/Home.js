@@ -14,10 +14,28 @@ const buttonVarians = {
     }
     
 }
+
+const containerVariants= {
+    hidden : {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition:{ delay: 1.5,duration: 1.5}
+    },
+    exit : {
+        x: '-100vw',
+        transition: {ease: 'easeInOut'}
+    }
+}
 const Home = () => {
   return (
-    <motion.div className="home container" initial={{rotateZ: 180,opacity: 0}}     transition={{ duration: 1 }}
-     animate={{rotateZ: 0,opacity: 1 }}>
+    <motion.div className="home container" 
+    variants={containerVariants}
+    initial="hidden"
+    animate="visible"
+    exit="exit"
+     >
     <motion.h2    animate={{ fontSize: '50px',color: '#ff2994',  }} drag="x"
     dragConstraints={{ left: -100, right: 100 }}      transition={{ duration: 0.5 }}
      whileHover={{scale: 2.4}} whileTap={{scale: 0.9}}

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch,useLocation } from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
 import Base from './components/Base';
 import Toppings from './components/Toppings';
 import Order from './components/Order';
 import Example1 from './components/example1';
+import {AnimatePresence} from 'framer-motion'
 
 function App() {
+  const location = useLocation();
   const [pizza, setPizza] = useState({ base: "", toppings: [] });
 
   const addBase = (base) => {
@@ -27,23 +29,25 @@ function App() {
   return (
     <>
       <Header />
-      <Switch>
-        <Route path="/base">
-          <Base addBase={addBase} pizza={pizza} />
+      <AnimatePresence>
+        <Switch location={location} key={location.key}>
+          <Route path="/base">
+            <Base addBase={addBase} pizza={pizza} />
+          </Route>
+          <Route path="/toppings">
+            <Toppings addTopping={addTopping} pizza={pizza} />
+          </Route>
+          <Route path="/order">
+            <Order pizza={pizza} />
+          </Route>
+          <Route path="/example1">
+            <Example1  />
         </Route>
-        <Route path="/toppings">
-          <Toppings addTopping={addTopping} pizza={pizza} />
-        </Route>
-        <Route path="/order">
-          <Order pizza={pizza} />
-        </Route>
-        <Route path="/example1">
-          <Example1  />
-      </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </AnimatePresence>
     </>
   );
 }
